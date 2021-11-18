@@ -1,5 +1,5 @@
 <svelte:head>
-    <title>Svelte App</title>
+    <title>Michael Martin | IzMichael</title>
 </svelte:head>
 
 <script>

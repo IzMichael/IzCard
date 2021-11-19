@@ -4,7 +4,7 @@
 
 <script>
 	import { onMount } from 'svelte';
-    import Link from '../lib/Link.svelte';
+    import Link from '../lib/LinkMobile.svelte';
 
     var bgs = [
         {'img':'/assets/img/akl-bg.png', 'attr':'Photo by <a href="https://unsplash.com/@samferrara">Samuel Ferrara</a> on <a href="https://unsplash.com/s/photos/auckland">Unsplash</a>'},
@@ -29,26 +29,11 @@
         || document.documentElement.clientWidth
         || document.body.clientWidth;
         
-        if (width <= 1024) {
-            window.location = '/mobile'
+        if (width > 1024) {
+            window.location = '/'
         }
 
         bg()
-
-        const left = document.getElementById('left');
-        const right = document.getElementById('right');
-
-        await sleep(1.5);
-        left.classList.remove('h-0');
-        left.classList.add('h-full');
-        left.classList.add('p-5');
-        await sleep(0.7);
-        right.classList.remove('opacity-0');
-        left.classList.remove('translate-x-1/2');
-        right.classList.add('-translate-x-full');
-        right.classList.remove('-translate-x-1/2');
-        await sleep(0.7);
-        right.classList.remove('-translate-x-full');
         
         let pfp = 'irl';
 
@@ -109,16 +94,18 @@
     ];
 </script>
 
-<div id="main" class="flex flex-row items-center justify-center w-screen h-screen p-16 overflow-hidden">
-    <div id="left" class="z-50 flex flex-col items-center justify-center w-1/3 h-0 overflow-hidden font-bold text-white transition-all duration-700 ease-in-out transform translate-x-1/2 bg-gray-600 rounded-lg shadow-2xl">
-        <div class="relative w-32 h-32 overflow-hidden rounded-full">
-            <img src="./assets/img/IRL-Circle.png" alt="IRL PFP" id="irl-pfp" class="absolute top-0 z-40 w-full h-full transition-all duration-500 ease-in-out">
-            <img src="./assets/img/MC-Circle.png" alt="MC PFP" id="mc-pfp" class="absolute bottom-0 z-40 w-full h-0 transition-all duration-500 ease-in-out">
-        </div>
-
-        <div class="relative w-full h-10 mt-2 overflow-hidden text-3xl">
-            <h1 id="irl-name" class="absolute top-0 left-0 z-40 flex flex-col items-center justify-center w-full h-full overflow-hidden transition-all duration-500 ease-in-out bg-gray-600">Michael Martin</h1>
-            <h1 id="mc-name" class="absolute top-0 left-0 z-40 flex flex-col items-center justify-center w-full h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-600">IzMichael</h1>
+<div id="main" class="flex flex-col items-center justify-center w-screen h-screen p-8 overflow-hidden">
+    <div id="left" class="z-50 flex flex-col items-center justify-start w-full pb-2 font-bold text-white bg-gray-600 rounded-lg shadow-2xl">
+        <div class="flex flex-row items-center justify-between w-full p-2">
+            <div class="relative w-16 h-16 overflow-hidden rounded-full">
+                <img src="./assets/img/IRL-Circle.png" alt="IRL PFP" id="irl-pfp" class="absolute top-0 z-40 w-full h-full transition-all duration-500 ease-in-out">
+                <img src="./assets/img/MC-Circle.png" alt="MC PFP" id="mc-pfp" class="absolute bottom-0 z-40 w-full h-0 transition-all duration-500 ease-in-out">
+            </div>
+    
+            <div class="relative flex-1 h-10 mt-2 overflow-hidden text-3xl">
+                <h1 id="irl-name" class="absolute top-0 left-0 z-40 flex flex-col items-center justify-center w-full h-full overflow-hidden transition-all duration-500 ease-in-out bg-gray-600">Michael Martin</h1>
+                <h1 id="mc-name" class="absolute top-0 left-0 z-40 flex flex-col items-center justify-center w-full h-0 overflow-hidden transition-all duration-500 ease-in-out bg-gray-600">IzMichael</h1>
+            </div>
         </div>
 
         <hr class="w-8 my-4">
@@ -127,7 +114,7 @@
         <p id="img-attr" class="text-sm font-light">a</p>
     </div>
 
-    <div id="right" class="z-40 flex flex-col items-center justify-center w-1/3 p-2 transition-all duration-700 ease-in-out transform -translate-x-1/2 bg-gray-500 rounded-r-lg shadow-2xl opacity-0" style="height: 90%;">
+    <div id="right" class="z-40 flex flex-col items-center justify-center flex-1 w-full p-2 mt-5 bg-gray-500 rounded-lg shadow-2xl">
         {#each links as { url, img, text }, i}
             <Link {url} {img} {text}/>
 	    {/each}
